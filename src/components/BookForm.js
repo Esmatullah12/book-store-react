@@ -7,15 +7,12 @@ const BookForm = ({ onAdd }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Create a new book object
     const newBook = {
-      id: Date.now(), // You can use a better unique ID generation method
+      id: Date.now(),
       title,
       author,
     };
-    // Call the onAdd function to add the new book
     onAdd(newBook);
-    // Clear the form fields
     setTitle('');
     setAuthor('');
   };

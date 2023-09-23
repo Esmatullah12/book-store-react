@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 const Book = ({ book, onDelete }) => {
   const handleDelete = () => {
-    // Implement delete functionality and call onDelete when the delete button is clicked
     onDelete(book.id);
   };
 
