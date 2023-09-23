@@ -3,10 +3,10 @@ import BookList from './BookList';
 import BookForm from './BookForm';
 
 const booksArray = [
-  { id: 1, name: 'TED Talks', author: 'Chris Anderson' },
-  { id: 2, name: 'Homo Deus', author: 'Noah Harari' },
-  { id: 3, name: 'Factfulness', author: 'Hans Rosling' },
-  { id: 4, name: 'Kite Runner', author: 'Khalid Hassani' },
+  { id: 1, title: 'TED Talks', author: 'Chris Anderson' },
+  { id: 2, title: 'Homo Deus', author: 'Noah Harari' },
+  { id: 3, title: 'Factfulness', author: 'Hans Rosling' },
+  { id: 4, title: 'Kite Runner', author: 'Khalid Hassani' },
 ];
 
 const onDelete = (bookId) => {
