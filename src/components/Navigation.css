@@ -1,0 +1,22 @@
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 2.5rem;
+}
+
+.nav-menu {
+  display: flex;
+  margin-top: 10px;
+  list-style: none;
+}
+
+.nav-link {
+  font-size: 1.2rem;
+  margin-left: 20px;
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase;
+}
