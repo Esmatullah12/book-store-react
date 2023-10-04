@@ -4,11 +4,13 @@ const bookSlice = createSlice({
   name: 'books',
   initialState: [],
   reducers: {
-    addBook: () => {
-
+    addBook: (state, action) => {
+      const newBook = action.payload;
+      state.push(newBook);
     },
-    removeBook: () => {
-
+    removeBook: (state, action) => {
+      const bookIdRemove = action.payload;
+      return state.filter((book) => book.id !== bookIdRemove);
     },
   },
 
