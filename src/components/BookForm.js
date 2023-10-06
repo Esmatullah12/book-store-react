@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import { addBookAsync } from '../redux/bookAsyncActions';
 
 const BookForm = () => {
@@ -10,7 +11,7 @@ const BookForm = () => {
 
   const handleSubmit = () => {
     const newBook = {
-      itemId: Date.now(),
+      item_id: uuidv4(),
       title,
       category,
       author,
@@ -22,7 +23,7 @@ const BookForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
       <input
         type="text"
         placeholder="Title"
@@ -42,7 +43,7 @@ const BookForm = () => {
         onChange={(e) => (setCategory(e.target.value))}
       />
       <button type="submit" onClick={handleSubmit}>Add Book</button>
-    </form>
+    </>
   );
 };
 

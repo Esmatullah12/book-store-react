@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBooks } from '../redux/bookAsyncActions';
+import { v4 as uuidv4 } from 'uuid';
 import Book from './Book';
+import { fetchBooks } from '../redux/bookAsyncActions';
 
 const BookList = () => {
   const books = useSelector((state) => state.books.books);
-  const status = useSelector((state) => state.books.books);
+  const status = useSelector((state) => state.books.status);
   const error = useSelector((state) => state.books.error);
   const dispatch = useDispatch();
 
@@ -14,7 +15,9 @@ const BookList = () => {
       dispatch(fetchBooks());
     }
   }, [status, dispatch]);
+
   let content;
+
   if (status === 'loading') {
     content = <div>Loading...</div>;
   } else if (status === 'succeeded') {
@@ -23,7 +26,7 @@ const BookList = () => {
         <h2>Book List</h2>
         <ul>
           {books.map((book) => (
-            <Book key={book.itemId || books.item_id || Date.now()} book={book} />
+            <Book key={books.itemId || books.item_id || uuidv4()} book={book} />
           ))}
         </ul>
       </div>

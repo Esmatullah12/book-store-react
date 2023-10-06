@@ -14,8 +14,11 @@ const Book = ({ book }) => {
   };
 
   return (
-    <div key={itemId}>
-      <h2>{title}</h2>
+    <li key={itemId}>
+      <p>
+        Title:
+        {title}
+      </p>
       <p>
         Author:
         {author}
@@ -24,8 +27,10 @@ const Book = ({ book }) => {
         Category:
         {category}
       </p>
-      <button type="button" onClick={() => handleRemoveBook(book.item_id)}>Delete</button>
-    </div>
+      <button type="button" onClick={() => handleRemoveBook(itemId)}>
+        Remove
+      </button>
+    </li>
   );
 };
 
@@ -34,7 +39,6 @@ Book.propTypes = {
     itemId: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
-    item_id: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
   }).isRequired,
 };
