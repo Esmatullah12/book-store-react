@@ -1,43 +1,52 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { addBookAsync, fetchBooks, removeBookAsync } from '../bookAsyncActions';
 
 const initialState = {
-  booksData: [
-    {
-      item_id: '1',
-      title: 'The Great Gatsby',
-      author: 'John Smith',
-      category: 'Fiction',
-    },
-    {
-      item_id: '2',
-      title: 'Anna Karenina',
-      author: 'Leo Tolstoy',
-      category: 'Fiction',
-    },
-    {
-      item_id: '3',
-      title: 'The Selfish Gene',
-      author: 'Richard Dawkins',
-      category: 'Nonfiction',
-    },
-  ],
+  books: [],
+  status: 'idle',
+  error: null,
 };
 
 const bookSlice = createSlice({
-  name: 'books',
+  name: 'book',
   initialState,
-  reducers: {
-    addBook: (state, action) => {
-      const newBook = action.payload;
-      state.booksData = [...state.booksData, newBook];
-    },
-    removeBook: (state, action) => {
-      const bookItemIdRemove = action.payload;
-      state.booksData = state.booksData.filter((book) => book.item_id !== bookItemIdRemove);
-    },
-  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchBooks.pending, (state) => {
+        state.status = 'loading';
+      })
 
+      .addCase(fetchBooks.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.books = action.payload;
+      })
+
+      .addCase(fetchBooks.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+
+      .addCase(addBookAsync.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.books.push(action.payload);
+      })
+
+      .addCase(addBookAsync.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+
+      .addCase(removeBookAsync.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.books = state.books.filter((book) => book.itemId !== action.payload);
+      })
+
+      .addCase(removeBookAsync.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
+  },
 });
 
-export const { addBook, removeBook } = bookSlice.actions;
 export default bookSlice.reducer;

@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addBook } from '../redux/books/booksSlice';
+import { addBookAsync } from '../redux/bookAsyncActions';
 
 const BookForm = () => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
-  const dispatch = useDispatch();
+  const [category, setCategory] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     const newBook = {
-      id: Date.now(),
+      itemId: Date.now(),
       title,
+      category,
       author,
     };
-    dispatch(addBook(newBook));
+    dispatch(addBookAsync(newBook));
+    setCategory('');
     setTitle('');
     setAuthor('');
   };
@@ -33,7 +35,13 @@ const BookForm = () => {
         value={author}
         onChange={(e) => setAuthor(e.target.value)}
       />
-      <button type="submit">Add Book</button>
+      <input
+        type="text"
+        placeholder="Category"
+        value={category}
+        onChange={(e) => (setCategory(e.target.value))}
+      />
+      <button type="submit" onClick={handleSubmit}>Add Book</button>
     </form>
   );
 };
