@@ -37,12 +37,17 @@ const BookForm = () => {
             />
           </div>
           <div>
-            <input
-              type="text"
-              placeholder="Category"
+            <select
+              className={styles.dropdown}
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-            />
+            >
+              <option value="category1">Fiction</option>
+              <option value="category2">Roman</option>
+              <option value="category3">Novel</option>
+              <option value="category3">Non-Fiction</option>
+            </select>
+
           </div>
           <button type="button" onClick={handleSubmit}>
             Add Book
