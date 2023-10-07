@@ -1,15 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navigation.css';
+import { BsFillPersonFill } from 'react-icons/bs';
+import styles from './styles/Navbar.module.css';
 
 const Navigation = () => (
-  <div className="navbar">
-    <h1 className="logo">BookStore</h1>
-    <ul className="nav-menu">
-      <li className="nav-item"><Link className="nav-link" to="/">Book</Link></li>
-      <li className="nav-item"><Link className="nav-link" to="/books">categories</Link></li>
-    </ul>
-  </div>
+  <nav className={styles.nav}>
+    <div>
+      <h1>BookstoreCMS</h1>
+      <ul>
+        <li>
+          <Link className={({ isActive }) => (isActive ? styles.activeLink : '')} to="/">Books</Link>
+        </li>
+        <li>
+          <Link className={({ isActive }) => (isActive ? styles.activeLink : '')} to="catagories">Catagories</Link>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <BsFillPersonFill className={styles.icon} />
+    </div>
+  </nav>
 );
 
 export default Navigation;
